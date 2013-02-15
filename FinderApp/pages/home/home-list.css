@@ -1,0 +1,96 @@
+﻿.listview {
+    -ms-grid-columns: auto 1fr;
+	-ms-grid-rows: auto 1fr;
+    display:-ms-grid;
+    position:relative;
+	height:100%;
+	width:20%;
+    background-color: whitesmoke;
+}
+
+    .listview .title-header {
+        -ms-grid-column-span:2;
+        display: -ms-grid;
+        -ms-grid-columns: auto 1fr;
+        padding-bottom: 10px;
+        color: black;
+    }
+
+    .listview .win-backbutton {
+        -ms-grid-column: 1;
+        margin-left: 19px;
+        margin-top: 52px;
+        display:none;
+    }
+
+    .listview .title {
+        -ms-grid-column: 2;
+       margin-left: 14px;
+        margin-top: 17px;
+    }
+
+.listview #locationListDiv {
+    margin: 0px 12px;
+    margin-left:5px;
+    font-size: 24px;
+    min-width: 76%;
+    -ms-grid-row: 2;
+    -ms-grid-column-span: 2;
+    overflow-y:scroll;
+}
+
+.listview #locationList {
+    min-width: 96%;
+}
+
+.listview tbody tr:nth-child(odd) {
+   background-color: #ccc;
+   color: black;
+}
+
+.listview .header{
+    font-size: 14px;
+}
+
+.listview .filter {
+    font-size: 8px;
+    margin-top: -4px;
+}
+
+.listview .hidden {
+    display:none;
+}
+
+.listview .asc:after {
+  content: " ▲";
+}
+
+.listview .desc:after {
+    content: " ▼";
+}
+
+.listview .win-replayWriting::before{
+ content: "\E16E";
+}
+
+.listview table {
+            font-size: 14px;
+        }
+
+
+@media screen and (-ms-view-state: snapped) {
+    #mapdiv {
+        display:none;
+    }
+	
+	.listview  {
+        display:block;
+        visibility: visible;
+        opacity:1;
+        width:100%;
+    }
+
+     #detailsMain{
+        margin-left: 20px;
+    }
+}

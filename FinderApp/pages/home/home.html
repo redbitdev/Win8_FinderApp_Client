@@ -1,0 +1,221 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>homePage</title>
+
+    <!-- WinJS references -->
+    <link href="//Microsoft.WinJS.1.0/css/ui-dark.css" rel="stylesheet" />
+    <script src="//Microsoft.WinJS.1.0/js/base.js"></script>
+    <script src="//Microsoft.WinJS.1.0/js/ui.js"></script>
+
+    <!-- home css file -->
+    <link href="/pages/home/home.css" rel="stylesheet" />
+    <link href="/pages/home/home-directions.css" rel="stylesheet" />
+    <link href="/pages/home/home-list.css" rel="stylesheet" />
+    <link href="/pages/home/home-details.css" rel="stylesheet" />
+    <link href="/pages/home/home-custom-flyout.css" rel="stylesheet" />
+    <link href="/pages/home/home-searchResults.css" rel="stylesheet" />
+
+    <!-- Bing maps references -->
+    <script type="text/javascript" src="ms-appx:///Bing.Maps.JavaScript//js/veapicore.js"></script>
+    <script type="text/javascript" src="ms-appx:///Bing.Maps.JavaScript//js/veapimodules.js"></script>
+
+    <!-- Configuration of the Finder App -->
+    <script src="/js/config.js"></script>
+
+    <!-- Data Service -->
+    <script src="/js/data.js"></script>
+    <script src="/js/geo.js"></script>
+
+    <!-- home js file -->
+    <script src="home.variables.js"></script>
+    <script src="home.directions.js"></script>
+    <script src="home.list.js"></script>
+    <script src="home.details.js"></script>
+    <script src="home.js"></script>
+
+</head>
+<body>
+    <!-- template for the directions list -->
+    <div id="directionItemTemplate" data-win-control="WinJS.Binding.Template">
+        <div class="directionItem">
+            <i data-win-bind="className: iconName"></i>
+            <div class="directionDetail">
+                <div class="header" data-win-bind="innerText: header">Route</div>
+                <div class="subHeader" data-win-bind="innerText: subHeader">37.4 km, 27 mins</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- template for search results -->
+    <div id="resultTemplate" data-win-control="WinJS.Binding.Template">
+        <div class="win-type-large result" data-win-bind="innerText:name"></div>
+    </div>
+
+    <!-- Template for data list view  -->
+    <div id="rowTemplate"
+        data-win-control="WinJS.Binding.Template">
+        <table>
+            <tbody>
+
+                <tr>
+                    <td class="hidden" data-win-bind="innerText:id"></td>
+                    <td data-win-bind="innerText:distance"></td>
+                    <td data-win-bind="innerText:name"></td>
+                    <td data-win-bind="innerText:address"></td>
+                </tr>
+
+            </tbody>
+        </table>
+    </div>
+
+    <!-- The content that will be loaded and displayed. -->
+    <div class="fragment homepage">
+
+        <!-- Main map section -->
+        <section id="main" aria-label="Main content" role="main">
+
+            <div id="mapdiv"></div>
+
+            <!-- List view div -->
+            <div class="win-ui-light listview">
+                <div class="title-header">
+                    <button type="button" class="win-backbutton"></button>
+                    <!--<h1 class="win-type-ellipses title win-type-x-large">List Details</h1>-->
+                </div>
+                <div id="locationListDiv">
+                    <table id="locationList">
+                        <!-- data-win-control="WinJS.UI.ListView"
+                data-win-options="{ 
+                    itemDataSource: Locations.locationList.dataSource,
+                    itemTemplate: select('#taskTemplate'),
+                    layout: { type: WinJS.UI.ListLayout }
+ 
+                 }"
+                >-->
+                        <thead>
+                            <tr>
+                                <th class="hidden"></th>
+                                <th><span id="distanceHead" class="header">Distance</span></th>
+                                <th><span id="nameHead" class="header">Name</span> <span id="nameFilter" class="filter win-answerButtonGuide win-replayWriting"></span></th>
+                                <th><span id="addressHead" class="header">Address</span> <span id="addressFilter" class="filter win-answerButtonGuide win-replayWriting"></span></th>
+                            </tr>
+                        </thead>
+                        <tbody id="locationListBody">
+                        </tbody>
+
+                    </table>
+                </div>
+                <div id="addressFilterFlyout" data-win-control="WinJS.UI.Flyout" aria-label="{Filter Flyout}">
+                    <div>
+                        <input id="addressFilterText" />
+                        <button id="addressFilterButton">Filter</button>
+                    </div>
+                </div>
+                <div id="nameFilterFlyout" data-win-control="WinJS.UI.Flyout" aria-label="{Filter Flyout}">
+                    <div>
+                        <input id="nameFilterText" />
+                        <button id="nameFilterButton">Filter</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Directions div -->
+        <div class="win-ui-light directionsDiv custom-flyout">
+
+            <div class="title-header">
+                <button type="button" class="win-backbutton"></button>
+                <div class="win-type-x-large title">Directions</div>
+            </div>
+            <div class="directionsDetails" id="directionsDetails" data-win-control="WinJS.UI.ListView"
+                data-win-options="{itemTemplate:select('#directionItemTemplate'), 
+			selectionMode: 'none',
+			layout: {type: WinJS.UI.ListLayout}}">
+            </div>
+
+            <div class="directionsDisclaimer win-type-xx-small">
+                No guarantee is made regarding accuracy of these directions for any reason, including contruction, projects, traffic or other events.  For informational purposes only.
+            </div>
+        </div>
+
+        <!-- Details View -->
+        <div id="pageDetails" class="win-ui-light details">
+            <div class="title-header">
+                <button type="button" class="win-backbutton"></button>
+                <h1 class="win-type-ellipses title">List Details</h1>
+            </div>
+            <section aria-label="Main content" role="main" id="detailsMain">
+
+                <article id="map">
+                    <h2>Address</h2>
+                    <h4 id="address"></h4>
+                    <div id="mapDivImage"></div>
+                </article>
+                <article id="info" class="pane">
+                    <h2>Information</h2>
+                    <div id="infoDiv"></div>
+                </article>
+            </section>
+        </div>
+
+        <!-- The content that will be loaded and displayed. -->
+        <div class="searchResults fragment">
+            <div id="header">
+                <button class="win-backbutton" aria-label="Back" type="button"></button>
+                <div class="titlearea">
+                    <h1 class="pagetitle win-type-ellipsis"></h1>
+                    <h2 class="pagesubtitle win-type-ellipsis"></h2>
+                </div>
+            </div>
+            <section aria-label="Main content" role="main">
+                <div class="resultsmessage win-type-x-large">No results match your search.</div>
+                <div class="filterarea">
+                    <ul class="filterbar"></ul>
+                    <select class="filterselect"></select>
+                </div>
+                <div class="resultslist win-selectionstylefilled" aria-label="Search results" data-win-control="WinJS.UI.ListView" data-win-options="{ selectionMode: 'none' }"></div>
+            </section>
+        </div>
+
+
+        <!-- App Bar -->
+        <div id="appBar" data-win-control="WinJS.UI.AppBar">
+            <button
+                data-win-control="WinJS.UI.AppBarCommand"
+                data-win-options="{id:'cmdDirections',label:'Directions',section:'selection'}">
+            </button>
+            <button
+                data-win-control="WinJS.UI.AppBarCommand"
+                data-win-options="{id:'cmdClearListFilter',label:'Clear Filter',icon:'clear',tooltip:'Sort', hidden: true,section:'selection'}">
+            </button>
+
+            <button
+                data-win-control="WinJS.UI.AppBarCommand"
+                data-win-options="{id:'cmdLocation',label:'My location',section:'global'}">
+            </button>
+            <button
+                data-win-control="WinJS.UI.AppBarCommand"
+                data-win-options="{id:'cmdSearchLocation',label:'Search Location',icon:'mappin',section:'global',tooltip:'Search Location'}">
+            </button>
+            <button
+                data-win-control="WinJS.UI.AppBarCommand"
+                data-win-options="{id:'cmdRefreshList',icon: 'refresh', label:'Refresh list',section:'global'}">
+            </button>
+
+
+        </div>
+
+        <!-- Upper App Bar -->
+        <div id="appBarUpper" data-win-control="WinJS.UI.AppBar" aria-label="Navigation Bar"
+            data-win-options="{layout:'custom',placement:'top'}">
+            <header aria-label="Navigation bar" role="banner" id="appBarUpperHeader">
+                <h1 class="appBarTitleArea win-type-ellipsis">
+                    <span id="title" class="pagetitle" data-win-bind="innerText: Finder.Config.appName"></span>
+                </h1>
+            </header>
+        </div>
+    </div>
+</body>
+</html>

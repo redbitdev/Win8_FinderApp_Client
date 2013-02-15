@@ -1,0 +1,55 @@
+﻿
+#mapdiv{
+    position:relative;
+    height:100%;
+    width: 80%;
+    float: right;
+}
+
+@media screen and (-ms-view-state: snapped) {
+    .homepage section[role=main] {
+    }
+}
+
+@media screen and (-ms-view-state: portrait) {
+    .homepage section[role=main] {
+        margin-left: 100px;
+    }
+}
+
+#searching .win-settings-section {
+	height: 80%;
+	display: -ms-grid;
+	-ms-grid-columns: auto auto;
+	-ms-grid-rows: auto auto auto;
+}
+
+#buttonSearch {
+	-ms-grid-column:1;
+	-ms-grid-row:3;
+	-ms-grid-column-align:end;
+    margin-right: 20px;
+}
+
+.labelLocation{
+	-ms-grid-row:1;
+	-ms-grid-column:1;
+	margin:20px;
+	
+}
+
+#textLocation {
+	-ms-grid-row:2;
+	-ms-grid-column:1;
+	margin: 20px;
+}
+
+#resultsView {
+	-ms-grid-column:1;
+	-ms-grid-row:4;
+}
+
+.result {
+    margin: 12px 20px;
+    font-size: 24px;
+}

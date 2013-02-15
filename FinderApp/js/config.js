@@ -102,7 +102,7 @@
         /***************************************************
          * Bing Maps Key - to get a key visit http://www.bingmapsportal.com/
          ***************************************************/
-        bingMapsKey: "AvOW5Fz4QTsubTTdmaVnseeZnAQ0JYwbx_6zdMdgHk6iF-pnoTE7vojUFJ1kXFTP",
+        bingMapsKey: "SET-YOUR-KEY-HERE",
         routeUrl: 'http://dev.virtualearth.net/REST/V1/Routes/Driving?o=json&wp.0={0}&wp.1={1}&rpo=points&optmz=timeWithTraffic&avoid=minimizeTolls&key={2}',
 
     });

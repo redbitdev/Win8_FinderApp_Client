@@ -11,9 +11,15 @@
 
             // setup the document elements
             $('#pageDetails .title-header .title').text(data[Finder.Config.nameField]);
-            document.getElementById("address").textContent = data.address;
-            document.getElementById("infoDiv").innerHTML = Finder.Formatter.format(Finder.Config.infoFormat, data);
+            //document.getElementById("address").textContent = data.address;    // edited out to allow to display secondary field data
+            document.getElementById("address").textContent = data[Finder.Config.secondaryField];   //set to secondary field 
 
+            if (Finder.Config.detailField) {  // display detail from data, check to see if detailField was specified, if not - fall back to infoFormat set by default
+                document.getElementById("infoDiv").innerHTML = Finder.Formatter.format(data[Finder.Config.detailField], data);
+            }
+            else {
+                document.getElementById("infoDiv").innerHTML = Finder.Formatter.format(Finder.Config.infoFormat, data);
+            }
             // setup sharing for details
             Finder.Home.setupDetailsSharing(true);
 

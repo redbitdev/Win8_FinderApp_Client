@@ -84,6 +84,7 @@
                 row = WinJS.Utilities.query("tr", result).get(0);
                 row.data = loc;
                 row.children[2].innerText = loc[Finder.Config.nameField];
+                row.children[3].innerText = loc[Finder.Config.secondaryField]; 
                 row.addEventListener("click", rowClick);
                 productContainer.appendChild(row);
             });
@@ -132,7 +133,7 @@
     function sortByAddress(e) {
 
         setDownArrow(e);
-        loadTable("address");
+        loadTable(Finder.Config.secondaryField);
     }
 
     function sortByDistance(e) {
@@ -149,7 +150,7 @@
 
     function performFilterByAddress(e) {
         var query = document.getElementById("addressFilterText").value;
-        Finder.Data.filter("address", query);
+        Finder.Data.filter(Finder.Config.secondaryField, query);
         loadTable();
         cmdClearListFilter.winControl.hidden = false;
     }

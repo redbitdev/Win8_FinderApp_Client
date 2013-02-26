@@ -1,8 +1,10 @@
 ﻿(function () {
     WinJS.Namespace.define("Finder.Config", {
-        /**
-         Hockey Rink Finder
-         ** /
+        
+
+
+        /** Hockey Rink Finder **/
+        /*
         appName: "Hockey Rink Finder",
         staticUrl: "http://rinksi.de/home/map.json",
         pathToObject: ["rink", "rink"],
@@ -10,7 +12,7 @@
         longidudeField: "longitude",
         nameField: "name",
         secondaryField: "address",
-        / ** **/
+        */
 
         /**
         Vancouver Parks
@@ -53,6 +55,7 @@
         /**
         Sample Flu Data from server
         **/
+
         appName: "Sample Server Flu Data",
         staticUrl: "http://finder-server-sample.azurewebsites.net/api/data/flu_data",
         pathToArray: "",
@@ -60,8 +63,9 @@
         longidudeField: "longitude",
         nameField: "location",
         secondaryField: "address",
-        
+        detailField: "location",
 
+        
         /***************************************************
          * Various helper text
          ***************************************************/
@@ -88,6 +92,7 @@
          * Info section on the details page. Configuration
          ***************************************************/
         infoFormat: "<h4>Here is some info about {{nameField}}.<h4>",
+        /* infoFormat is the default message if detailField is not specified under field settings above */
 
         /***************************************************
          * About Flyout text
